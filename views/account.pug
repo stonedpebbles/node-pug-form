@@ -1,0 +1,25 @@
+extends baseLayout.pug
+block appContent
+    p Name: #{name}
+    p Amount charged: #{charge}
+    if !hasPaid 
+        p You have not paid yet. Please enter card information below
+    else 
+        p Payment made. 
+    form(method='POST' action='/account')
+        div.form-group
+            label(for='name') Cardholder's Name:
+            input#name.form-control(type='text', placeholder='Jon Wick' name='name', required )
+            p
+            label(for='email') Email:
+            input#email.form-control(type='email', placeholder='jonwicklovespug@gmail.com' name='email', required )
+            p
+            label(for='number') Card Number:
+            input#number.form-control(type='number', placeholder='5011 1111 1111 1111' name='cardNum', required )
+            p
+            label(for='remember-me')
+            input#remember-me.form-control(type='checkbox', value='remember-me',checked)
+            | Remember this payment method    
+            p 
+            button.btn.btn-primary(type='submit') Submit
+            a(href='/', title='home') Go Back
